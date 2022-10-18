@@ -4,7 +4,7 @@
 
 int main(){
     Power4 power4 = Power4();
-    std::cout << "Hello, do you want to play against [c]omputer or [h]umans?";
+    std::cout << "Hello, do you want to play against [c]omputer or [h]umans?" << std::endl;
     std::string input = "";
     std::getline(std::cin, input);
     power4.newGame(input.compare("c") == 0);

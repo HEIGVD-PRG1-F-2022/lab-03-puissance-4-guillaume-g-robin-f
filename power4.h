@@ -8,7 +8,12 @@
 
 class Power4{
 private:
-    std::array<std::array<int, 3>, 3> GAME_ARR = {{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}}};
+    std::array<std::array<int, 7>, 6> GAME_ARR = {{{0, 0, 0, 0, 0, 0, 0},
+                                                   {0, 0, 0, 0, 0, 0, 0},
+                                                   {0, 0, 0, 0, 0, 0, 0},
+                                                   {0, 0, 0, 0, 0, 0, 0},
+                                                   {0, 0, 0, 0, 0, 0, 0},
+                                                   {0, 0, 0, 0, 0, 0, 0}}};
 public:
     Power4();
 
@@ -31,4 +36,6 @@ public:
     void displayArray();
 
     void newGame(bool isVsComputer);
+
+    int findX(int y);
 };

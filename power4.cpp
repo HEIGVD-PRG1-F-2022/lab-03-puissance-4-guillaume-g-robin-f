@@ -67,6 +67,15 @@ bool Power4::checkWin(int player) {
     return false;
 };
 
+int Power4::findX(int y) {
+    for (int x = GAME_ARR.size() - 1; x >= 0; x--) {
+        if (GAME_ARR[x][y] == 0) {
+            return x;
+        }
+    }
+    return -1;
+}
+
 /**
  * This method ask the user to check a case and then save it on the array
  * @param user the current user
@@ -74,34 +83,35 @@ bool Power4::checkWin(int player) {
  * @return false if an error occurred
  */
 bool Power4::addACase(int user, bool isComputer) {
-    std::cout << "User " << user << " give some coordinate (format:x,y):";
+    std::cout << "User " << user << " give some coordinate (format:x,y):" << std::endl;
 
-    int xString = 0;
-    int yString = 0;
-    isComputer = true;
+    int y = 0;
+
     if (isComputer) {
-            //generate random coordinate
-            xString = rand() % GAME_ARR.size();
-        yString = rand() % GAME_ARR[0].size();
+        //generate random coordinate
+        y = rand() % GAME_ARR[0].size();
     } else {
         //ask user the coordinate of the case to check
         std::string caseToAdd;
-        getline(std::cin, caseToAdd);
+        std::cin >> y;
 
         //get single coordinate x or y
         //xString = caseToAdd;
     }
 
     //cast coordinate to int and get the asked case in the array
-    //const std::string yString = "TO CALCULATE";
-    int &askedCase = GAME_ARR[xString, nullptr, 10][yString, nullptr, 10];
-    //check if the case hasn't been checked else return false
-    if (askedCase == 0) {
-        askedCase = user;
-        return true;
+    int x = findX(y);
+
+    if (x == -1) {
+        // TODO change error text
+        std::cout << "An error occurred, please retry" << std::endl;
+        return false;
     }
-    std::cout << "An error occurred, please retry" << std::endl;
-    return false;
+
+    int &askedCase = GAME_ARR[x][y];
+
+    askedCase = user;
+    return true;
 }
 
 /**
