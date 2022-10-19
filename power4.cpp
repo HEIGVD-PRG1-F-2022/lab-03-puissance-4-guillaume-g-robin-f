@@ -119,18 +119,31 @@ bool Power4::addACase(int user, bool isComputer) {
  */
 void Power4::displayArray() {
     //iterate on each case of the array
+
+    for (int i = 0; i < GAME_ARR[0].size(); i++) {
+        std::cout << "| " << i << " ";
+    }
+
+    std::cout << "|" << std::endl;
+
     for (int x = 0; x < GAME_ARR.size(); x++) {
         for (int y = 0; y < GAME_ARR[0].size(); y++) {
             switch (GAME_ARR[x][y]) {
                 case 2:
-                    std::cout << "  X  ";
+                    std::cout << " X |";
                     break;
                 case 1:
-                    std::cout << "  *  ";
+                    std::cout << " * |";
                     break;
                 case 0:
                 default:
-                    std::cout << " " << x << "," << y << " ";
+                    if (y == 0) {
+                        std::cout << "|   |";
+                    }
+                    else {
+                        std::cout << "   |";
+                    }
+                    break;
             }
         }
         std::cout << std::endl;
