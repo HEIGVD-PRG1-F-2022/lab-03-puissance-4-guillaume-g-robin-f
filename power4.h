@@ -1,21 +1,19 @@
 //
 // Created by tuxca on 18.10.2022.
 //
-#include <array>
+#include <vector>
+#include "env.h"
+
 #ifndef MANDELBROT_POWER4_H
 #define MANDELBROT_POWER4_H
 #endif
 
 class Power4{
 private:
-    std::array<std::array<int, 7>, 6> GAME_ARR = {{{0, 0, 0, 0, 0, 0, 0},
-                                                   {0, 0, 0, 0, 0, 0, 0},
-                                                   {0, 0, 0, 0, 0, 0, 0},
-                                                   {0, 0, 0, 0, 0, 0, 0},
-                                                   {0, 0, 0, 0, 0, 0, 0},
-                                                   {0, 0, 0, 0, 0, 0, 0}}};
+    std::vector<std::vector<POSSIBLE_VALUE>> gameArr;
+
 public:
-    Power4();
+    Power4(int nLines = 6, int nColumn = 7);
 
     /**
      * Method that check if a player win the game (currently)
