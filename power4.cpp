@@ -4,12 +4,14 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
+
 #include "power4.h"
 #include "env.h"
 
+using namespace std;
+
 Power4::Power4(int nLines, int nColumn) {
-    this->gameArr.assign(nColumn, std::vector(nLines, POSSIBLE_VALUE::EMPTY));
+    this->gameArr.assign(nColumn, vector(nLines, POSSIBLE_VALUE::EMPTY));
 }
 
 /**
@@ -78,7 +80,7 @@ bool Power4::checkWin(int player) {
 
 int Power4::findX(int y) {
     for (int x = gameArr.size() - 1; x >= 0; x--) {
-        if (gameArr[x][y] == 0) {
+        if (gameArr[x][y] == POSSIBLE_VALUE::EMPTY) {
             return x;
         }
     }
@@ -91,28 +93,28 @@ int Power4::findX(int y) {
  * @param isComputer if true the case is asked by the computer
  * @return false if an error occurred
  */
-bool Power4::addACase(int user, bool isComputer) {
-    std::cout << "User " << user << " give a number of column (in range: 0-6):" << std::endl;
+bool Power4::addACase(POSSIBLE_VALUE user, bool isComputer) {
+    cout << "User " << user << " give a number of column (in range: 0-" << gameArr.size()-1 << "):" << endl;
 
-    int y = 0;
+    int y = -1;
 
     if (isComputer) {
         //generate random coordinate
         y = rand() % gameArr[0].size();
     } else {
         //ask user the coordinate of the case to check
-        std::string caseToAdd;
-        std::cin >> y;
-
-        //get single coordinate x or y
-        //xString = caseToAdd;
+        while (y < 0 || y >= gameArr[0].size()) {
+            cin >> y;
+            y < 0 ||
+            y >= gameArr[0].size() && cout << "Not a valid index please enter a valid value: " << endl;
+        }
     }
 
     //cast coordinate to int and get the asked case in the array
     int x = findX(y);
 
     if (x == -1) {
-        std::cout << "No place on this column please choose another one." << std::endl;
+        cout << "No place on this column please choose another one." << endl;
         return false;
     }
 
@@ -129,30 +131,30 @@ void Power4::displayArray() {
     //iterate on each case of the array
 
     for (int i = 0; i < gameArr[0].size(); i++) {
-        std::cout << "| " << i << " ";
+        cout << "| " << i << " ";
     }
 
-    std::cout << "|" << std::endl;
+    cout << "|" << endl;
 
     for (int x = 0; x < gameArr.size(); x++) {
         for (int y = 0; y < gameArr[0].size(); y++) {
             if (y == 0) {
-                std::cout << "|";
+                cout << "|";
             }
             switch (gameArr[x][y]) {
-                case 2:
-                    std::cout << " X |";
+                case POSSIBLE_VALUE::USER_2:
+                    cout << " X |";
                     break;
-                case 1:
-                    std::cout << " * |";
+                case POSSIBLE_VALUE::USER_1:
+                    cout << " * |";
                     break;
-                case 0:
+                case POSSIBLE_VALUE::EMPTY:
                 default:
-                    std::cout << "   |";
+                    cout << "   |";
                     break;
             }
         }
-        std::cout << std::endl;
+        cout << endl;
     }
 }
 
@@ -161,32 +163,32 @@ void Power4::displayArray() {
  * @param isVsComputer if true user 2 is the computer
  */
 void Power4::newGame(bool isVsComputer) {
-    bool currentUser = POSSIBLE_VALUE::USER_1;
+    POSSIBLE_VALUE currentUser = POSSIBLE_VALUE::USER_1;
 
     displayArray();
 
-    while (!(checkWin(1) || checkWin(2))) {
+    while (!(checkWin(POSSIBLE_VALUE::USER_1) || checkWin(POSSIBLE_VALUE::USER_2))) {
         bool isPassed = false;
         while (!isPassed) {
             isPassed = addACase(currentUser, isVsComputer && currentUser == POSSIBLE_VALUE::USER_2);
         }
         displayArray();
-        currentUser = (currentUser == POSSIBLE_VALUE::USER_1) ?
-                      POSSIBLE_VALUE::USER_2
-                                                              : POSSIBLE_VALUE::USER_1;
+        currentUser = (currentUser == POSSIBLE_VALUE::USER_1)
+                      ? POSSIBLE_VALUE::USER_2
+                      : POSSIBLE_VALUE::USER_1;
     }
 
-    if (checkWin(1)) {
+    if (checkWin(POSSIBLE_VALUE::USER_1)) {
         if (isVsComputer) {
-            std::cout << "Congratulation, you won !" << std::endl;
+            cout << "Congratulation, you won !" << endl;
         } else {
-            std::cout << "Congratulation, User 1 won !" << std::endl;
+            cout << "Congratulation, User 1 won !" << endl;
         }
     } else {
         if (isVsComputer) {
-            std::cout << "What a reveal your IQ is less than mine, you lost !" << std::endl;
+            cout << "What a reveal your IQ is less than mine, you lost !" << endl;
         } else {
-            std::cout << "Congratulation, User 2 won !" << std::endl;
+            cout << "Congratulation, User 2 won !" << endl;
         }
     }
 }

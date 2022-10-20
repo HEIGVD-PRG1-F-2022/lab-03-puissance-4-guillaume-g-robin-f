@@ -7,5 +7,4 @@
 
 enum POSSIBLE_VALUE  {EMPTY, USER_1, USER_2};
 
-
 #endif

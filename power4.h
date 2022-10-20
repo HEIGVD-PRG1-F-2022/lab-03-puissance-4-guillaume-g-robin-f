@@ -6,7 +6,6 @@
 
 #ifndef MANDELBROT_POWER4_H
 #define MANDELBROT_POWER4_H
-#endif
 
 class Power4{
 private:
@@ -29,7 +28,7 @@ public:
      * @param isComputer if true the case is asked by the computer
      * @return false if an error occurred
      */
-    bool addACase(int user, bool isComputer);
+    bool addACase(POSSIBLE_VALUE user, bool isComputer);
 
     void displayArray();
 
@@ -37,3 +36,5 @@ public:
 
     int findX(int y);
 };
+
+#endif
