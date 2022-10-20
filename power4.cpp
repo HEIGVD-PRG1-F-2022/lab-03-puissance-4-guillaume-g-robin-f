@@ -23,11 +23,11 @@ bool Power4::checkEquality() {
     for (int x = 0; x < gameArr.size(); x++) {
         for (int y = 0; y < gameArr[0].size(); y++) {
             if (gameArr[x][y] == POSSIBLE_VALUE::EMPTY) {
-                return true;
+                return false;
             }
         }
     }
-    return false;
+    return true;
 }
 
 /**
@@ -197,18 +197,20 @@ void Power4::newGame(bool isVsComputer) {
     if (checkWin(POSSIBLE_VALUE::USER_1)) {
         if (isVsComputer) {
             cout << "Congratulation, you won !" << endl;
-        } else if (checkEquality()) {
-            cout << "Oh no, you are equally bad !" << endl;
         } else {
             cout << "Congratulation, User 1 won !" << endl;
+        }
+    } else if (checkEquality()) {
+        if (isVsComputer) {
+            cout << "What !?! HOW? it's an equality." << endl;
+        } else {
+            cout << "Oh no, you are equally bad !" << endl;
         }
     } else {
         if (isVsComputer) {
             cout << "What a reveal your IQ is less than mine, you lost !" << endl;
-        } else if (checkEquality()) {
-            cout << "What !?! HOW? it's an equality)" << endl;
         } else {
-            cout << "Congratulation, you won !" << endl;
+            cout << "Congratulation, User 2 won !" << endl;
         }
     }
 }
