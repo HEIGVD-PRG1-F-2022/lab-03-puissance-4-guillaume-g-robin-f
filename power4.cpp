@@ -5,10 +5,15 @@
 #include <iostream>
 #include <vector>
 
+//If it's windows (32) we can import that for the color in terminal.
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 #include "power4.h"
-#include "env.h"
 
 using namespace std;
+using POSSIBLE_VALUE = Power4::POSSIBLE_VALUE;
 
 Power4::Power4(int nLines, int nColumn) {
     this->gameArr.assign(nColumn, vector(nLines, POSSIBLE_VALUE::EMPTY));
@@ -141,11 +146,15 @@ bool Power4::addACase(POSSIBLE_VALUE user, bool isComputer) {
 }
 
 /**
- * This method display as user-friendly as possible the array of the game
+ * This method display as user-friendly as possible the two-dimension vector of the game
  */
-void Power4::displayArray() {
-    //iterate on each case of the array
+void Power4::display2DVector() {
+    //if it's windows (32) we can execute this line to change the terminal to UTF8 and as that have a display for ours colors.
+    #ifdef _WIN32
+        system(("chcp "s + to_string(CP_UTF8)).c_str());
+    #endif
 
+    //iterate on each case of the array
     for (int i = 0; i < gameArr[0].size(); i++) {
         cout << "| " << i << " ";
     }
@@ -159,10 +168,10 @@ void Power4::displayArray() {
             }
             switch (gameArr[x][y]) {
                 case POSSIBLE_VALUE::USER_2:
-                    cout << " X |";
+                    cout << " \033[33;91mX\033[0m |";
                     break;
                 case POSSIBLE_VALUE::USER_1:
-                    cout << " * |";
+                    cout << " \033[33;94m*\033[0m |";
                     break;
                 case POSSIBLE_VALUE::EMPTY:
                 default:
@@ -181,14 +190,14 @@ void Power4::displayArray() {
 void Power4::newGame(bool isVsComputer) {
     POSSIBLE_VALUE currentUser = POSSIBLE_VALUE::USER_1;
 
-    displayArray();
+    display2DVector();
 
     while (!(checkWin(POSSIBLE_VALUE::USER_1) || checkWin(POSSIBLE_VALUE::USER_2) || checkEquality())) {
         bool isPassed = false;
         while (!isPassed) {
             isPassed = addACase(currentUser, isVsComputer && currentUser == POSSIBLE_VALUE::USER_2);
         }
-        displayArray();
+        display2DVector();
         currentUser = (currentUser == POSSIBLE_VALUE::USER_1)
                       ? POSSIBLE_VALUE::USER_2
                       : POSSIBLE_VALUE::USER_1;

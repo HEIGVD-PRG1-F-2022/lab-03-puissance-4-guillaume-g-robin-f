@@ -2,12 +2,20 @@
 // Created by tuxca on 18.10.2022.
 //
 #include <vector>
-#include "env.h"
+
+//If it's windows (32) we can import that for the color in terminal.
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #ifndef MANDELBROT_POWER4_H
 #define MANDELBROT_POWER4_H
 
 class Power4 {
+public:
+    enum POSSIBLE_VALUE {
+        EMPTY, USER_1, USER_2
+    };
 private:
     std::vector<std::vector<POSSIBLE_VALUE>> gameArr;
 
@@ -37,7 +45,7 @@ public:
      */
     bool addACase(POSSIBLE_VALUE user, bool isComputer);
 
-    void displayArray();
+    void display2DVector();
 
     void newGame(bool isVsComputer);
 
