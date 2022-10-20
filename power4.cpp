@@ -94,7 +94,7 @@ int Power4::findX(int y) {
  * @return false if an error occurred
  */
 bool Power4::addACase(POSSIBLE_VALUE user, bool isComputer) {
-    cout << "User " << user << " give a number of column (in range: 0-" << gameArr.size()-1 << "):" << endl;
+    cout << "User " << user << " give a number of column (in range: 0-" << gameArr[0].size()-1 << "):" << endl;
 
     int y = -1;
 
