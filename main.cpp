@@ -1,7 +1,7 @@
 /**
  * The main file
  *
- * @name Power 4
+ * @name Connect 4
  * @date 20.10.2022
  * @authors Guillaume Gonin and Robin Forestier
  */
@@ -10,7 +10,7 @@
 #include <iostream>
 
 //Internals exports
-#include "power4.h"
+#include "connect4.h"
 
 using namespace std;
 
@@ -27,7 +27,7 @@ int main() {
     cin >> input;
     cout << endl;
 
-    Power4 power4;
+    Connect4 connect4;
     if (input == "y" || input == "Y") {
         //Asking the size chosen
         cout << "Choose the size (numberOfColumns numberOfLines) ?";
@@ -37,17 +37,17 @@ int main() {
 
         //Validate size
         if ((nColumns > 3 && nLines > 0) || (nLines > 3 && nColumns > 0)) {
-            power4 = Power4(nLines, nColumns);
+            connect4 = Connect4(nLines, nColumns);
         } else {
             //If not valide we create with the default size anyway
             cout << "Not a valid size. default one taken!" << endl;
-            power4 = Power4();
+            connect4 = Connect4();
         }
     } else {
-        power4 = Power4();
+        connect4 = Connect4();
     }
     //Launching the game
-    power4.newGame(isComputerActived);
+    connect4.newGame(isComputerActived);
 
     return EXIT_SUCCESS;
 }

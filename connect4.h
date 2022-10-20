@@ -1,6 +1,11 @@
-//
-// Created by tuxca on 18.10.2022.
-//
+/**
+ * A class file for the power 4 algorithm and display
+ * (because we need to have access the array to display it)
+ *
+ * @name Connect 4
+ * @date 20.10.2022
+ * @authors Guillaume Gonin and Robin Forestier
+ */
 #include <vector>
 
 //If it's windows (32) we can import that for the color in terminal.
@@ -11,7 +16,7 @@
 #ifndef MANDELBROT_POWER4_H
 #define MANDELBROT_POWER4_H
 
-class Power4 {
+class Connect4 {
 public:
     enum POSSIBLE_VALUE {
         EMPTY, USER_1, USER_2
@@ -26,7 +31,7 @@ public:
      * @param nLines Number of lines. Optional: if not given = 6
      * @param nColumn Number of columns. Optional: if not given = 7
      */
-    Power4(int nLines = 6, int nColumn = 7);
+    Connect4(int nLines = 6, int nColumn = 7);
 
     /**
      * Method that check if an equality appended.

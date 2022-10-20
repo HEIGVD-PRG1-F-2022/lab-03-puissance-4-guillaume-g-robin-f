@@ -3,4 +3,4 @@ project(Mandelbrot)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Mandelbrot main.cpp power4.cpp power4.h)
+add_executable(Mandelbrot main.cpp connect4.cpp connect4.h)
