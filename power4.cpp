@@ -189,10 +189,10 @@ void Power4::display2DVector() {
             }
             switch (gameArr[x][y]) {
                 case POSSIBLE_VALUE::USER_2:
-                    cout << " \033[33;91mX\033[0m |";
+                    cout << " \033[33;91m\u25CF\033[0m |";
                     break;
                 case POSSIBLE_VALUE::USER_1:
-                    cout << " \033[33;94m*\033[0m |";
+                    cout << " \033[33;94m\u25CF\033[0m |";
                     break;
                 case POSSIBLE_VALUE::EMPTY:
                 default:
