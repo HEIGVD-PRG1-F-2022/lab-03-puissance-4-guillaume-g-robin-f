@@ -7,7 +7,7 @@
 #ifndef MANDELBROT_POWER4_H
 #define MANDELBROT_POWER4_H
 
-class Power4{
+class Power4 {
 private:
     std::vector<std::vector<POSSIBLE_VALUE>> gameArr;
 
@@ -21,6 +21,13 @@ public:
      * @return true if the player as win
      */
     bool checkWin(int player);
+
+    /**
+     * Method that check if an equality appended.
+     *
+     * @return true if an equality appended
+     */
+    bool checkEquality();
 
     /**
      * This method ask the user to check a case and then save it on the array

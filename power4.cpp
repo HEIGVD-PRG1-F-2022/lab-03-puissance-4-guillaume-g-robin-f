@@ -15,6 +15,22 @@ Power4::Power4(int nLines, int nColumn) {
 }
 
 /**
+ * Method that check if an equality appended.
+ *
+ * @return true if an equality appended
+ */
+bool Power4::checkEquality() {
+    for (int x = 0; x < gameArr.size(); x++) {
+        for (int y = 0; y < gameArr[0].size(); y++) {
+            if (gameArr[x][y] == POSSIBLE_VALUE::EMPTY) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/**
  * Method that check if a player win the game (currently)
  *
  * @param player the player to check the win
@@ -94,7 +110,7 @@ int Power4::findX(int y) {
  * @return false if an error occurred
  */
 bool Power4::addACase(POSSIBLE_VALUE user, bool isComputer) {
-    cout << "User " << user << " give a number of column (in range: 0-" << gameArr[0].size()-1 << "):" << endl;
+    cout << "User " << user << " give a number of column (in range: 0-" << gameArr[0].size() - 1 << "):" << endl;
 
     int y = -1;
 
@@ -167,7 +183,7 @@ void Power4::newGame(bool isVsComputer) {
 
     displayArray();
 
-    while (!(checkWin(POSSIBLE_VALUE::USER_1) || checkWin(POSSIBLE_VALUE::USER_2))) {
+    while (!(checkWin(POSSIBLE_VALUE::USER_1) || checkWin(POSSIBLE_VALUE::USER_2) || checkEquality())) {
         bool isPassed = false;
         while (!isPassed) {
             isPassed = addACase(currentUser, isVsComputer && currentUser == POSSIBLE_VALUE::USER_2);
@@ -181,14 +197,18 @@ void Power4::newGame(bool isVsComputer) {
     if (checkWin(POSSIBLE_VALUE::USER_1)) {
         if (isVsComputer) {
             cout << "Congratulation, you won !" << endl;
+        } else if (checkEquality()) {
+            cout << "Oh no, you are equally bad !" << endl;
         } else {
             cout << "Congratulation, User 1 won !" << endl;
         }
     } else {
         if (isVsComputer) {
             cout << "What a reveal your IQ is less than mine, you lost !" << endl;
+        } else if (checkEquality()) {
+            cout << "What !?! HOW? it's an equality)" << endl;
         } else {
-            cout << "Congratulation, User 2 won !" << endl;
+            cout << "Congratulation, you won !" << endl;
         }
     }
 }

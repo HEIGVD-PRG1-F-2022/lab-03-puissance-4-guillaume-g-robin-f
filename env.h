@@ -5,6 +5,8 @@
 #ifndef MANDELBROT_ENV_H
 #define MANDELBROT_ENV_H
 
-enum POSSIBLE_VALUE  {EMPTY, USER_1, USER_2};
+enum POSSIBLE_VALUE {
+    EMPTY, USER_1, USER_2
+};
 
 #endif
