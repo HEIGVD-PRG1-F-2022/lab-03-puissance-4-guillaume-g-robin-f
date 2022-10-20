@@ -11,11 +11,6 @@
 #include <iostream>
 #include <vector>
 
-//If it's windows (32) we can import that for the color in terminal.
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
 //Internals imports
 #include "connect4.h"
 
@@ -170,11 +165,6 @@ bool Connect4::addACase(POSSIBLE_VALUE user, bool isComputer) {
  * This method display as user-friendly as possible the two-dimension vector of the game.
  */
 void Connect4::display2DVector() {
-    //if it's windows (32) we can execute this line to change the terminal to UTF8 and as that have a display for ours colors.
-    #ifdef _WIN32
-        system(("chcp "s + to_string(CP_UTF8)).c_str());
-    #endif
-
     //iterate on each case of the array
     for (int i = 0; i < gameArr[0].size(); i++) {
         cout << "| " << i << " ";

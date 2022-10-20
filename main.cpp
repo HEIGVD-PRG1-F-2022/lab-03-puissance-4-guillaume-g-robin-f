@@ -9,12 +9,22 @@
 //Externals exports
 #include <iostream>
 
+//If it's windows (32) we can import that for the color in terminal.
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 //Internals exports
 #include "connect4.h"
 
 using namespace std;
 
 int main() {
+    //if it's windows (32) we can execute this line to change the terminal to UTF8 and as that have a display for ours colors.
+    #ifdef _WIN32
+        system(("chcp "s + to_string(CP_UTF8)).c_str());
+    #endif
+        
     //Asking for computer or human play-style
     cout << "Hello, do you want to play against [c]omputer or [h]umans?";
     string input;
