@@ -1,7 +1,13 @@
-//
-// Created by tuxca on 18.10.2022.
-//
+/**
+ * A class file for the power 4 algorithm and display
+ * (because we need to have access the array to display it)
+ *
+ * @name Power 4
+ * @date 20.10.2022
+ * @authors Guillaume Gonin and Robin Forestier
+ */
 
+//Externals imports
 #include <iostream>
 #include <vector>
 
@@ -10,11 +16,19 @@
 #include <windows.h>
 #endif
 
+//Internals imports
 #include "power4.h"
 
 using namespace std;
+//Renaming Power4::POSSIBLE_VALUE to just POSSIBLE_VALUE for a cleaner code reading
 using POSSIBLE_VALUE = Power4::POSSIBLE_VALUE;
 
+/**
+ * A constructor that take a number of lines and a number of columns
+ *
+ * @param nLines Number of lines. Optional: if not given = 6
+ * @param nColumn Number of columns. Optional: if not given = 7
+ */
 Power4::Power4(int nLines, int nColumn) {
     this->gameArr.assign(nColumn, vector(nLines, POSSIBLE_VALUE::EMPTY));
 }
@@ -36,7 +50,7 @@ bool Power4::checkEquality() {
 }
 
 /**
- * Method that check if a player win the game (currently)
+ * Method that check if a player win the game (currently).
  *
  * @param player the player to check the win
  * @return true if the player as win
@@ -99,6 +113,12 @@ bool Power4::checkWin(int player) {
     return false;
 };
 
+/**
+ * Find the first x coord empty regarding the y coord.
+ *
+ * @param y the coord
+ * @return the x or -1 if not found
+ */
 int Power4::findX(int y) {
     for (int x = gameArr.size() - 1; x >= 0; x--) {
         if (gameArr[x][y] == POSSIBLE_VALUE::EMPTY) {
@@ -110,6 +130,7 @@ int Power4::findX(int y) {
 
 /**
  * This method ask the user to check a case and then save it on the array
+ *
  * @param user the current user
  * @param isComputer if true the case is asked by the computer
  * @return false if an error occurred
@@ -146,7 +167,7 @@ bool Power4::addACase(POSSIBLE_VALUE user, bool isComputer) {
 }
 
 /**
- * This method display as user-friendly as possible the two-dimension vector of the game
+ * This method display as user-friendly as possible the two-dimension vector of the game.
  */
 void Power4::display2DVector() {
     //if it's windows (32) we can execute this line to change the terminal to UTF8 and as that have a display for ours colors.
@@ -184,7 +205,8 @@ void Power4::display2DVector() {
 }
 
 /**
- * This method create a new game and describe all the process of a game until someone win
+ * This method create a new game and describe all the process of a game until someone win.
+ *
  * @param isVsComputer if true user 2 is the computer
  */
 void Power4::newGame(bool isVsComputer) {

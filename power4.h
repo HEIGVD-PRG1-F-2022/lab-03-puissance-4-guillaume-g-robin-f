@@ -20,15 +20,13 @@ private:
     std::vector<std::vector<POSSIBLE_VALUE>> gameArr;
 
 public:
-    Power4(int nLines = 6, int nColumn = 7);
-
     /**
-     * Method that check if a player win the game (currently)
+     * A constructor that take a number of lines and a number of columns
      *
-     * @param player the player to check the win
-     * @return true if the player as win
+     * @param nLines Number of lines. Optional: if not given = 6
+     * @param nColumn Number of columns. Optional: if not given = 7
      */
-    bool checkWin(int player);
+    Power4(int nLines = 6, int nColumn = 7);
 
     /**
      * Method that check if an equality appended.
@@ -38,18 +36,41 @@ public:
     bool checkEquality();
 
     /**
+     * Method that check if a player win the game (currently).
+     *
+     * @param player the player to check the win
+     * @return true if the player as win
+     */
+    bool checkWin(int player);
+
+    /**
+     * Find the first x coord empty regarding the y coord.
+     *
+     * @param y the coord
+     * @return the x or -1 if not found
+     */
+    int findX(int y);
+
+    /**
      * This method ask the user to check a case and then save it on the array
+     *
      * @param user the current user
      * @param isComputer if true the case is asked by the computer
      * @return false if an error occurred
      */
     bool addACase(POSSIBLE_VALUE user, bool isComputer);
 
+    /**
+     * This method display as user-friendly as possible the two-dimension vector of the game
+     */
     void display2DVector();
 
+    /**
+     * This method create a new game and describe all the process of a game until someone win.
+     *
+     * @param isVsComputer if true user 2 is the computer
+     */
     void newGame(bool isVsComputer);
-
-    int findX(int y);
 };
 
 #endif
